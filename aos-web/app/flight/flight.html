@@ -1,2 +1,28 @@
-<p>Flights</p>
-
+<div>
+	<table class="paged-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Název</th>
+				<th>Datum odletu</th>
+				<th>Vzdálenost</th>
+				<th>Celkem míst</th>
+				<th>Cena</th>
+				<th>Odlet z</th>
+				<th>Cíl letu</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="flight in flights">
+				<td>{{flight.id}}</td>
+				<td>{{flight.flightName}}</td>
+				<td>{{flight.dateOfDepatrure | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+				<td>{{flight.distance}}</td>
+				<td>{{flight.seats}}</td>
+				<td>{{flight.price | currency}}</td>
+				<td>{{flight.from}}</td>
+				<td>{{flight.to}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

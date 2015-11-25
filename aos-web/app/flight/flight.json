@@ -1,0 +1,23 @@
+[{
+	"id": 10,
+	"flightName": "PRG-OST2",
+	"dateOfDepatrure": "2015-10-27T01:04:46Z",
+	"distance": 356,
+	"seats": 300,
+	"price": 3560.66,
+	"from": "PRGCZ",
+	"to": "OSTCZ",
+	"url": "/flight/10"
+},
+{
+	"id": 11,
+	"flightName": "PRG-OST2",
+	"dateOfDepatrure": "2015-11-27T05:04:46Z",
+	"distance": 356,
+	"seats": 300,
+	"price": 3560.66,
+	"from": "OSTCZ",
+	"to": "PRGCZ",
+	"url": "/flight/11"
+}
+]
