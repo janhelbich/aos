@@ -101,7 +101,7 @@ public class ReservationManagementBean implements ReservationManagement {
 			throws CredentialException {
 		Reservation r = em.find(Reservation.class, id);
 		if (r != null) {
-			if (!r.getState().equals(ReservationState.PAID)) {
+			if (ReservationState.PAID.equals(r.getState())) {
 				throw new EJBException("Already paid reservation cannot be deleted.");
 			}
 			checkPasswordsMatch(password, r);

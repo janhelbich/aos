@@ -18,9 +18,9 @@ public class FlightDTO implements Serializable {
 
 	private Long id;
 	private String flightName;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssX", timezone="GMT")
-	private Date dateOfDepatrure;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssX")
+	private Date dateOfDeparture;
 	private Double distance;
 	private Integer seats;
 	private BigDecimal price;
@@ -41,7 +41,7 @@ public class FlightDTO implements Serializable {
 		this.to = f.getFlightTo().getDestinationId();
 		this.url = Constants.FLIGHT_RESOURCE_PATH + "/" + id;
 		if (f.getDateOfDeparture() != null) {
-			this.dateOfDepatrure = new Date(f.getDateOfDeparture().getTime());
+			this.dateOfDeparture = new Date(f.getDateOfDeparture().getTime());
 		}
 	}
 
@@ -59,14 +59,6 @@ public class FlightDTO implements Serializable {
 
 	public void setFlightName(String flightName) {
 		this.flightName = flightName;
-	}
-
-	public Date getDateOfDepatrure() {
-		return dateOfDepatrure;
-	}
-
-	public void setDateOfDepatrure(Date dateOfDepatrure) {
-		this.dateOfDepatrure = dateOfDepatrure;
 	}
 
 	public Double getDistance() {
@@ -115,6 +107,14 @@ public class FlightDTO implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Date getDateOfDeparture() {
+		return dateOfDeparture;
+	}
+
+	public void setDateOfDeparture(Date dateOfDeparture) {
+		this.dateOfDeparture = dateOfDeparture;
 	}
 
 }

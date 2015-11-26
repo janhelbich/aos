@@ -1,0 +1,16 @@
+[
+	{
+		"id": 3,
+		"destinationId": "OSTCZ",
+		"destinationName": "Ostrava",
+		"latitude": 24,
+		"longitude": 45
+	},
+	{
+		"id": 1,
+		"destinationId": "PRGCZ",
+		"destinationName": "Praha",
+		"latitude": 15.2,
+		"longitude": 45.1
+	}
+]

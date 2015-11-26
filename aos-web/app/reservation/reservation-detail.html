@@ -1,0 +1,46 @@
+<div class="reservation-detail">
+	<form name="reservationForm" 
+		  class="form-horizontal"
+	      ng-submit="reservationForm.$valid && resDetailCtrl.updateReservation()" novalidate>
+
+		<div class="form-group" ng-show="!resDetailCtrl.isNew">
+			<label class="col-sm-2 control-label">Reservation ID</label>
+			<div class="col-sm-6">
+				<input name="resId" type="text" ng-model="reservation.id" class="form-control" disabled />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Flight ID</label>
+			<div class="col-sm-6">
+				<input name="flightId" type="text" ng-model="reservation.flightId" class="form-control" disabled/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Number of seats</label>
+			<div class="col-sm-6">
+				<input name="latitude" type="number" ng-model="reservation.numOfSeats" min="1" max="100" class="form-control" required/>
+			</div>
+		</div>
+
+		<div class="form-group" ng-show="!resDetailCtrl.isNew">
+			<label class="col-sm-2 control-label">Reservation state</label>
+			<div class="col-sm-6">
+				<select ng-model="reservation.state" class="form-control" disabled>
+					<option value="NEW">New</option>
+					<option value="CANCELLED">Cancelled</option>
+					<option value="PAID">Paid</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="col-sm-offset-2 col-sm-6">
+			<input type="submit" value="Book now!" class="btn btn-primary" ng-show="resDetailCtrl.isNew" />
+			<input type="submit" value="Update" class="btn btn-primary" ng-show="!resDetailCtrl.isNew" />
+			<input type="submit" value="Cancel reservation" class="btn btn-danger" ng-click="cancel()" ng-show="!resDetailCtrl.isNew"/>
+			<input type="submit" value="Pay reservation" class="btn btn-success" ng-click="pay()" ng-show="!resDetailCtrl.isNew"/>
+		</div>
+
+	</form>
+</div>

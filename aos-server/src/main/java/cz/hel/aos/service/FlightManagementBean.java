@@ -84,7 +84,7 @@ public class FlightManagementBean implements FlightManagement {
 	}
 
 	private void fillFlightProperties(FlightDTO flight, Flight f) {
-		f.setDateOfDeparture(flight.getDateOfDepatrure());
+		f.setDateOfDeparture(flight.getDateOfDeparture());
 		f.setDistance(flight.getDistance());
 		
 		Destination from = destinationManagement.getDestination(flight.getFrom());

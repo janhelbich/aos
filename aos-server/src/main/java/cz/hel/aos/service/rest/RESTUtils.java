@@ -41,8 +41,10 @@ public class RESTUtils {
 		if (!filter.isEmpty()) {
 			List<String> conditions = new ArrayList<>();
 			String filterString = filter.get(0);
-			if (filterString.contains(", ")) {
-				conditions.addAll(Arrays.asList(filterString.split((", "))));
+			if (filterString.contains(",")) {
+				conditions.addAll(Arrays.asList(filterString.split((","))));
+			} else {
+				conditions.add(filterString);
 			}
 			for (String f : conditions) {
 				try {

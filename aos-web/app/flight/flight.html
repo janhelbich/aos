@@ -1,28 +1,75 @@
+<div class="flight-filter">
+	<form name="flightFilter"
+		  class="form-inline" novalidate>
+
+		<div class="form-group">
+			<label>Order by</label>
+			<select ng-model="criteria.orderBy" class="form-control">
+				<option value="id">Flight ID</option>
+				<option value="flightName">Flight name</option>
+				<option value="dateOfDeparture">Date of departure</option>
+				<option value="price">Price</option>
+				<option value="distance">Distance</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Sort</label>
+			<select ng-model="criteria.sort" class="form-control">
+				<option value="asc">Ascending</option>
+				<option value="desc">Descending</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Flight from date</label>
+			<input name="departureFromDate" type="date" class="form-control" ng-model="criteria.dateFrom" />
+		</div>
+		<div class="form-group">
+			<label>Flight to date</label>
+			<input name="departureToDate" type="date" class="form-control" ng-model="criteria.dateTo" />
+		</div>
+
+		<button type="submit" class="btn btn-default" ng-click="flightCtrl.fetchFlights()">Search!</button>
+	</form>
+</div>
+
+<hr style="border-width: 3px 0;"></hr>
+
 <div>
-	<table class="paged-table">
+	<table class="table">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Název</th>
-				<th>Datum odletu</th>
-				<th>Vzdálenost</th>
-				<th>Celkem míst</th>
-				<th>Cena</th>
-				<th>Odlet z</th>
-				<th>Cíl letu</th>
+				<th>Flight ID</th>
+				<th>Flight name</th>
+				<th>Date of departure</th>
+				<th>Total distance</th>
+				<th>Total seats</th>
+				<th>Price per person</th>
+				<th>Departure from</th>
+				<th>Target destination</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="flight in flights">
 				<td>{{flight.id}}</td>
 				<td>{{flight.flightName}}</td>
-				<td>{{flight.dateOfDepatrure | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+				<td>{{flight.dateOfDeparture | date:"yyyy-MM-dd HH:mm:ss"}}</td>
 				<td>{{flight.distance}}</td>
 				<td>{{flight.seats}}</td>
 				<td>{{flight.price | currency}}</td>
 				<td>{{flight.from}}</td>
 				<td>{{flight.to}}</td>
+				<td>
+					<button name="book-button" class="btn btn-success" ng-click="flightCtrl.bookFlight(flight)" >Book!</button>
+					<button name="edit-button" class="btn btn-primary" ng-click="flightCtrl.editFlight(flight)" >Edit</button>
+					<button name="delete-button" class="btn btn-danger" ng-click="flightCtrl.deleteFlight(flight)" >Delete</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
+</div>
+
+<hr style="border-width: 3px 0;"></hr>
+<div class="col-sm-offset-10">
+	<button class="btn btn-primary" ng-click="flightCtrl.newFlight()">New flight!</button>
 </div>

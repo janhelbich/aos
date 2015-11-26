@@ -1,0 +1,60 @@
+<div class="flight-detail">
+	<form name="flightForm" 
+		  class="form-horizontal"
+	      ng-submit="flightForm.$valid && flightDetailCtrl.updateFlight()" novalidate>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Flight name</label>
+			<div class="col-sm-6">
+				<input name="flightName" type="text" ng-model="flight.flightName" class="form-control" required />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Date of departure</label>
+			<div class="col-sm-6">
+				<input name="dateOfDeparture" type="date" ng-model="flight.dateOfDeparture" class="form-control" required />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Number of seats</label>
+			<div class="col-sm-6">
+				<input name="seats" type="number" ng-model="flight.seats" min="1" max="1000" class="form-control" required/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Distance</label>
+			<div class="col-sm-6">
+				<input name="distance" type="number" ng-model="flight.distance" min="1" class="form-control" required/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Price per person</label>
+			<div class="col-sm-6">
+				<input name="price" type="number" ng-model="flight.price" min="0" class="form-control" required/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Departure from</label>
+			<div class="col-sm-6">
+				<select ng-model="flight.from" class="form-control" ng-options="dest as dest for dest in destinations"></select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Target destination</label>
+			<div class="col-sm-6">
+				<select ng-model="flight.to" class="form-control" ng-options="dest as dest for dest in destinations"></select>
+			</div>
+		</div>
+
+		<div class="col-sm-offset-2 col-sm-6">
+			<input type="submit" value="Submit" class="btn btn-primary" />
+		</div>
+
+	</form>
+</div>

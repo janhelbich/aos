@@ -1,0 +1,32 @@
+<div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Destination ID</th>
+				<th>Destination code</th>
+				<th>Destination name</th>
+				<th>Latitude</th>
+				<th>Longitude</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="destination in destinations">
+				<td>{{destination.id}}</td>
+				<td>{{destination.destinationId}}</td>
+				<td>{{destination.destinationName}}</td>
+				<td>{{destination.latitude}}</td>
+				<td>{{destination.longitude}}</td>
+				<td>
+					<button name="edit-button" class="btn btn-primary" ng-click="destinationCtrl.editDestination(destination)" >Edit</button>
+					<button name="edit-button" class="btn btn-danger" ng-click="destinationCtrl.deleteDestination(destination)" >Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<hr style="border-width: 3px 0;"></hr>
+<div class="col-sm-offset-10">
+	<button class="btn btn-primary" ng-click="destinationCtrl.newDestination()">New destination!</button>
+</div>

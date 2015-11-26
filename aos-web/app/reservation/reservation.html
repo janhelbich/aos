@@ -1,0 +1,28 @@
+<div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Reservation ID</th>
+				<th>Reserved flight ID</th>
+				<th>Number of seats</th>
+				<th>Reservation state</th>
+				<th>URL</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="res in reservations">
+				<td>{{res.id}}</td>
+				<td>{{res.flightId}}</td>
+				<td>{{res.numOfSeats}}</td>
+				<td>{{res.state}}</td>
+				<td>{{API_URL + res.url}}</td>
+				<td>{{res.createdAt | date:'yyyy-MM-dd HH:mm'}}</td>
+				<td>
+					<button name="edit-button" class="btn btn-primary" ng-click="reservationCtrl.editReservation(res)" >Edit</button>
+					<button name="edit-button" class="btn btn-danger" ng-click="reservationCtrl.deleteReservation(res)" >Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

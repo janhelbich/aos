@@ -1,7 +1,7 @@
 [{
 	"id": 10,
 	"flightName": "PRG-OST2",
-	"dateOfDepatrure": "2015-10-27T01:04:46Z",
+	"dateOfDeparture": "2015-10-27T01:04:46Z",
 	"distance": 356,
 	"seats": 300,
 	"price": 3560.66,
@@ -12,7 +12,7 @@
 {
 	"id": 11,
 	"flightName": "PRG-OST2",
-	"dateOfDepatrure": "2015-11-27T05:04:46Z",
+	"dateOfDeparture": "2015-11-27T05:04:46Z",
 	"distance": 356,
 	"seats": 300,
 	"price": 3560.66,
