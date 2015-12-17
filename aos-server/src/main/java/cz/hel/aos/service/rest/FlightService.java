@@ -2,6 +2,8 @@ package cz.hel.aos.service.rest;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
@@ -22,7 +24,6 @@ import cz.hel.aos.Constants;
 import cz.hel.aos.entity.dto.FlightDTO;
 import cz.hel.aos.service.FlightManagement;
 import cz.hel.aos.service.ReferenceExistsException;
-import cz.hel.aos.service.SimpleCriteria;
 
 @Path(Constants.FLIGHT_RESOURCE_PATH)
 @ApplicationScoped
@@ -31,6 +32,7 @@ public class FlightService {
 	@Inject
 	private FlightManagement flightManagement;
 
+	@PermitAll
 	@Path("")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -38,6 +40,7 @@ public class FlightService {
 		return flightManagement.getAllFlights(RESTUtils.parseHeadersCriteria(headers));
 	}
 	
+	@PermitAll
 	@Path("{id}")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -49,6 +52,7 @@ public class FlightService {
 		return flightManagement.getFlight(id);
 	}
 	
+	@RolesAllowed({ "admin" })
 	@Path("")
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -63,6 +67,7 @@ public class FlightService {
 		}
 	}
 	
+	@RolesAllowed({ "admin" })
 	@Path("{id}")
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -81,6 +86,7 @@ public class FlightService {
 		}
 	}
 	
+	@RolesAllowed({ "admin" })
 	@Path("{id}")
 	@DELETE
 	public Response deleteFlight(@PathParam("id") Long id) {

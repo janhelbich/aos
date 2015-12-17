@@ -1,13 +1,13 @@
 package cz.hel.aos.util;
 
-// TODO class :)
+// TODO :)
 public class HashProvider {
 
 	public static boolean hashesMatch(String hashed, String plain) {
-		return true;
+		return hashed.equals(plain);
 	}
 
-	public static String hashPassword(String string) {
+	public static String hash(String string) {
 		return string;
 	}
 }

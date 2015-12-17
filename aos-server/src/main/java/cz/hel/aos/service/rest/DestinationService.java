@@ -2,6 +2,8 @@ package cz.hel.aos.service.rest;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,6 +32,7 @@ public class DestinationService {
 	@Inject
 	private DestinationManagement destinationManagement;
 	
+	@PermitAll
 	@Path("")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -37,6 +40,7 @@ public class DestinationService {
 		return destinationManagement.getAllDestinations();
 	}
 
+	@PermitAll
 	@Path("{id}")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -48,6 +52,7 @@ public class DestinationService {
 		return destinationManagement.getDestination(id);
 	}
 	
+	@RolesAllowed({ "admin" })
 	@Path("")
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -61,6 +66,7 @@ public class DestinationService {
 		}
 	}
 	
+	@RolesAllowed({ "admin" })
 	@Path("{id}")
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -78,6 +84,7 @@ public class DestinationService {
 		}
 	}
 	
+	@RolesAllowed({ "admin" })
 	@Path("{id}")
 	@DELETE
 	public Response deleteDestination(@PathParam("id") String id) {

@@ -2,6 +2,7 @@ package cz.hel.aos.service.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBException;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -31,6 +33,7 @@ public class ReservationService {
 	@Inject
 	private ReservationManagement reservationManagement;
 
+	@RolesAllowed({ "admin", "manager" })
 	@Path("")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -41,12 +44,13 @@ public class ReservationService {
 	@Path("{id}")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public ReservationDTO getReservation(@PathParam("id") Long id) {
+	public ReservationDTO getReservation(@PathParam("id") Long id, 
+										  @HeaderParam("X-Password") String password) {
+
 		if (id == null || id.equals(0L)) {
 			throw new BadRequestException("Reservation ID cannot be empty.");
 		}
 		
-		String password = null;
 		try {
 			return reservationManagement.getReservation(id, password);
 		} catch (CredentialException e) {
@@ -72,12 +76,14 @@ public class ReservationService {
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public ReservationDTO updateFlight(@PathParam("id") Long id, ReservationDTO reservation) {
+	public ReservationDTO updateFlight(@PathParam("id") Long id, 
+										@HeaderParam("X-Password") String password,
+										ReservationDTO reservation) {
+		
 		if (!id.equals(reservation.getId())) {
 			throw new BadRequestException("Path and reservation ID must match.");
 		}
 		
-		String password  = null;
 		try {
 			return reservationManagement.updateReservation(reservation, password);
 		} catch (CredentialException e) {
@@ -99,6 +105,7 @@ public class ReservationService {
 		return Response.ok().build();
 	}
 	
+	@RolesAllowed({ "admin", "manager" })
 	@Path("{id}")
 	@DELETE
 	public Response deleteFlight(@PathParam("id") Long id) {

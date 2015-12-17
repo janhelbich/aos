@@ -67,7 +67,7 @@ public class ReservationManagementBean implements ReservationManagement {
 		r.setCreatedAt(new Date());
 
 		String generated = generatePassword();
-		r.setPassword(HashProvider.hashPassword(generated));
+		r.setPassword(HashProvider.hash(generated));
 
 		ReservationDTO newRes = new ReservationDTO(em.merge(r));
 		newRes.setPassword(generated);
