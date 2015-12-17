@@ -45,33 +45,54 @@ angular.module('aos.reservation', ['ngRoute', 'constants'])
   }])
 
   .controller('ReservationDetailController', ['$scope', '$http', '$routeParams', '$location', 
-                                              'RESERVATION_PATH', 'API_URL',
-  										      function($scope, $http, $routeParams, $location, RESERVATION_PATH, API_URL) {
+                                              'RESERVATION_PATH', 'API_URL', 'FLIGHT_PATH',
+  										      function($scope, $http, $routeParams, $location, 
+                                      RESERVATION_PATH, API_URL, FLIGHT_PATH) {
+
+    $scope.errorMsg = null;
     $scope.reservation = { };
+    $scope.reservationPassword = null;
+    $scope.canAccess = false;
+
     var reservationId = $routeParams.reservationId;
     var flightId = $routeParams.flightId;
     this.isNew = reservationId === 'new';
     console.log('reservation url id', reservationId);
 
+    $scope.getReservation = function(resPasswd) {
+      $http.get(API_URL + RESERVATION_PATH + reservationId, 
+        { headers: { 'X-Password': $scope.reservationPassword }})
+          .then(function(response) {
+            $scope.canAccess = true;
+      	    $scope.reservation = response.data;
+
+      }, function(errResp) {
+        $scope.errorMsg = 'Reservation password is required to proceed.';
+        $scope.canAccess = false;
+        return { };
+      });
+    }
 
     if (!this.isNew) {
-      $http.get(API_URL + RESERVATION_PATH + reservationId).then(function(response) {
-      	$scope.reservation = response.data;
-      }, HandleHttpError);
+      $scope.getReservation($scope.reservationPassword);
     } else {
       $scope.reservation.flightId = flightId;
       $scope.reservation.state = 'NEW';
+      $scope.canAccess = true;
     }
 
     this.updateReservation = function() {
       if (this.isNew) {
         $http.post(API_URL + RESERVATION_PATH, $scope.reservation).then(function(response) {
           console.log('create reservation OK');
-          $location.path(RESERVATION_PATH);
+          $location.path(FLIGHT_PATH);
         }, HandleHttpError);
       } else {
-        $http.put(API_URL + RESERVATION_PATH + reservationId, $scope.reservation).then(function(response) {
-          console.log('update reservation OK');
+        $http.put(API_URL + RESERVATION_PATH + reservationId, 
+          $scope.reservation,
+          { headers: { 'X-Password': $scope.reservationPassword }})
+            .then(function(response) {
+              console.log('update reservation OK');
           $location.path(RESERVATION_PATH);
         }, HandleHttpError);
       }
@@ -89,6 +110,7 @@ angular.module('aos.reservation', ['ngRoute', 'constants'])
         $location.path(RESERVATION_PATH);
       }, HandleHttpError);
     }
+
 
   }]);
 

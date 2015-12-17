@@ -1,4 +1,29 @@
-<div class="reservation-detail">
+<div class="col-md-6" ng-show="!canAccess">
+	<div ng-show="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
+	<form name="reservationPasswordForm" ng-submit="getReservation()">
+		<table class="table">
+			<tbody>
+				
+				<!-- reservation password -->
+				<tr>
+					<td>
+						<label for="pswdField" class="sr-only">Login:</label>
+						<input type="password" id="respsw" placeholder="Reservation password..." ng-model="reservationPassword" class="form-control" required />
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<button class="btn btn-lg btn-primary btn-block">Proceed to reservation</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+
+
+<div class="reservation-detail" ng-show="canAccess">
 	<form name="reservationForm" 
 		  class="form-horizontal"
 	      ng-submit="reservationForm.$valid && resDetailCtrl.updateReservation()" novalidate>

@@ -2,6 +2,7 @@ package cz.hel.aos.service.rest;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBException;
 import javax.enterprise.context.ApplicationScoped;
@@ -10,9 +11,9 @@ import javax.security.auth.login.CredentialException;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -41,10 +42,11 @@ public class ReservationService {
 		return reservationManagement.getAllReservations();
 	}
 	
+	@PermitAll
 	@Path("{id}")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public ReservationDTO getReservation(@PathParam("id") Long id, 
+	public ReservationDTO getReservation(@PathParam("id") Long id,
 										  @HeaderParam("X-Password") String password) {
 
 		if (id == null || id.equals(0L)) {
@@ -54,10 +56,11 @@ public class ReservationService {
 		try {
 			return reservationManagement.getReservation(id, password);
 		} catch (CredentialException e) {
-			throw new NotAuthorizedException(Response.status(Status.UNAUTHORIZED));
+			throw new ForbiddenException();
 		}
 	}
 	
+	@PermitAll
 	@Path("")
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -72,6 +75,7 @@ public class ReservationService {
 		}
 	}
 	
+	@PermitAll
 	@Path("{id}")
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -87,7 +91,7 @@ public class ReservationService {
 		try {
 			return reservationManagement.updateReservation(reservation, password);
 		} catch (CredentialException e) {
-			throw new NotAuthorizedException(Response.status(Status.UNAUTHORIZED));
+			throw new ForbiddenException();
 		} catch (EJBException e) {
 			throw new BadRequestException(e.getMessage());
 		}
@@ -110,11 +114,8 @@ public class ReservationService {
 	@DELETE
 	public Response deleteFlight(@PathParam("id") Long id) {
 		
-		String password  = null;
 		try {
-			reservationManagement.deleteReservation(id, password);
-		} catch (CredentialException e) {
-			throw new NotAuthorizedException(Response.status(Status.UNAUTHORIZED));
+			reservationManagement.deleteReservation(id);
 		} catch (EJBException e) {
 			throw new BadRequestException(e.getMessage());
 		}

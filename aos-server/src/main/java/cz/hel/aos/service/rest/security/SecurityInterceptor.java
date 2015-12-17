@@ -31,7 +31,6 @@ public class SecurityInterceptor implements ContainerRequestFilter {
 	private static final String INVOKER_PROPERTY = "org.jboss.resteasy.core.ResourceMethodInvoker";
 	private static final Response ACCESS_DENIED = Response.status(Response.Status.UNAUTHORIZED).build();
 	private static final Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN).build();
-	private static final Response SERVER_ERROR = Response.serverError().build();
 
 	@Inject
 	private UserManagement userManagement;
@@ -69,7 +68,7 @@ public class SecurityInterceptor implements ContainerRequestFilter {
 		try {
 			cw = new CredentialsWrapper(authHeader);
 		} catch (Exception e) {
-			ctx.abortWith(SERVER_ERROR);
+			ctx.abortWith(ACCESS_DENIED);
 			return;
 		}
 

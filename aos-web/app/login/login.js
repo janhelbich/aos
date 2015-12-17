@@ -18,12 +18,11 @@ angular.module('aos.login', ['ngRoute', 'ngCookies', 'constants'])
                                     function ($http, $cookies, $rootScope, API_URL) {
     var service = {};
 
-    service.signUp = function (username, password, callback) {
+    service.signUp = function (username, password, succ, err) {
 
-        $http.post(API_URL + '/login', {})
-            .success(function (response) {
-                callback(response);
-            });
+        $http.post(API_URL + '/signUp', {}, {
+          headers: {'Authorization': 'Basic ' + btoa(username + ':' + password)}
+        }).then(succ, err);
 
     };
 
@@ -56,19 +55,17 @@ angular.module('aos.login', ['ngRoute', 'ngCookies', 'constants'])
   .controller('LoginController', ['$scope', '$rootScope', '$location', 'AuthenticationService',
                                   function ($scope, $rootScope, $location, AuthenticationService) {
     // reset login status
-    AuthenticationService.ClearCredentials();
+    AuthenticationService.clearCredentials();
 
     $scope.signUp = function () {
-        $scope.dataLoading = true;
-        AuthenticationService.Login($scope.username, $scope.password, function(response) {
-            if(response.success) {
-                AuthenticationService.SetCredentials($scope.username, $scope.password);
-                $location.path('/');
-            } else {
-                $scope.error = response.message;
-                $scope.dataLoading = false;
-            }
-        });
+        AuthenticationService.signUp($scope.username, $scope.password, 
+          function(succResp) {
+            AuthenticationService.setCredentials($scope.username, $scope.password);
+            $location.path('/');
+          }, 
+          function(errResp) {
+            $scope.error = errResp.message;
+          });
       };
   }]);
 

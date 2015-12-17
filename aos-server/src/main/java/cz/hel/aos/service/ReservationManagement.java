@@ -18,7 +18,7 @@ public interface ReservationManagement {
 
 	public ReservationDTO updateReservation(ReservationDTO reservation, String password) throws CredentialException;
 
-	public void deleteReservation(Long id, String password) throws CredentialException;
+	public void deleteReservation(Long id);
 
 	void pay(Long id, String payment);
 

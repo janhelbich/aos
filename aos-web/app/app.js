@@ -32,5 +32,13 @@
   }])
   .controller('404Controller', function() {
     window.location.href = '/not-found.html';
-  });
+  })
+  .run(['$rootScope', '$cookies', '$http',
+        function ($rootScope, $cookies, $http) {
+
+      $rootScope.globals = $cookies.get('globals') || {};
+      if ($rootScope.globals.currentUser) {
+          $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+      }
+  }]);
 

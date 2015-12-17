@@ -4,6 +4,9 @@ package cz.hel.aos.util;
 public class HashProvider {
 
 	public static boolean hashesMatch(String hashed, String plain) {
+		if (hashed == null || plain == null) {
+			return false;
+		}
 		return hashed.equals(plain);
 	}
 

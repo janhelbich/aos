@@ -97,14 +97,12 @@ public class ReservationManagementBean implements ReservationManagement {
 	}
 
 	@Override
-	public void deleteReservation(Long id, String password)
-			throws CredentialException {
+	public void deleteReservation(Long id) {
 		Reservation r = em.find(Reservation.class, id);
 		if (r != null) {
 			if (ReservationState.PAID.equals(r.getState())) {
 				throw new EJBException("Already paid reservation cannot be deleted.");
 			}
-			checkPasswordsMatch(password, r);
 			em.remove(r);
 		}
 	}
