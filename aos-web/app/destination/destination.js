@@ -73,13 +73,4 @@ angular.module('aos.destination', ['ngRoute'])
 
   }]);	
 
-  function HandleHttpError(response) {
-    console.log('error', response);
-    if (response.status === 404) {
-      window.location.href = '/not-found.html';
-    } else {
-      window.location.href = '/error.html';
-    }
-  }
-
 })();

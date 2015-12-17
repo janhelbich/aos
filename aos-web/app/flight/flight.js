@@ -101,15 +101,6 @@ angular.module('aos.flight', ['ngRoute', 'constants'])
 
   }]);
 
-  function HandleHttpError(response) {
-    console.log('error', response);
-    if (response.status === 404) {
-      window.location.href = '/not-found.html';
-    } else {
-      //window.location.href = '/error.html';
-    }
-  }
-
   function CriteriaHeaders(crit) {
     var v = { 'X-Filter': [ ] };
     if (crit.orderBy !== undefined && crit.orderBy != null) {

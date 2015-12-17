@@ -4,9 +4,11 @@
   angular.module('aos', [
     'constants',
     'ngRoute',
+    'ngCookies',
     'aos.flight',
     'aos.destination',
-    'aos.reservation'
+    'aos.reservation',
+    'aos.login'
   ]).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
@@ -24,23 +26,11 @@
         'Accept': 'application/json'
       };
   }])
+
   .controller('ResourcesController', [function() {
 
   }])
   .controller('404Controller', function() {
     window.location.href = '/not-found.html';
-  })
-  .service('sharedProps', [function() {
-    var prop = '';
-
-    return {
-      getProperty: function() {
-        return prop;
-      },
-      setProperty: function(value) {
-        prop = value;
-      }
-    };
-
-  }]);
+  });
 

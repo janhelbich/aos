@@ -90,15 +90,6 @@ angular.module('aos.reservation', ['ngRoute', 'constants'])
       }, HandleHttpError);
     }
 
-  }]);	
-
-  function HandleHttpError(response) {
-    console.log('error', response);
-    if (response.status === 404) {
-      window.location.href = '/not-found.html';
-    } else {
-      window.location.href = '/error.html';
-    }
-  }
+  }]);
 
 })();
