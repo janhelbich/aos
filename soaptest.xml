@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:prin="http://printing.service.aos.hel.cz/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <prin:printReservation>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <id>23424</id>
+            <!--Optional:-->
+            <flight>
+               <!--Optional:-->
+               <id>444</id>
+               <distance>3</distance>
+               <!--Optional:-->
+               <!--Optional:-->
+               <flightName>Testovaci let</flightName>
+               <!--Optional:-->
+               <price>234</price>
+               <!--Optional:-->
+               <totalSeats>343</totalSeats>
+            </flight>
+            <!--Optional:-->
+            <numberOfSeats>420</numberOfSeats>
+            <!--Optional:-->
+            <payment>34234</payment>
+            <!--Optional:-->
+            <reservationId>234234</reservationId>
+            <!--Optional:-->
+            <state>PAID</state>
+         </arg0>
+      </prin:printReservation>
+   </soapenv:Body>
+</soapenv:Envelope>
