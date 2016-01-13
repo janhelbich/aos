@@ -1,4 +1,4 @@
-package cz.hel.aos.service.printing;
+package cz.hel.aos.service.webservice;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
