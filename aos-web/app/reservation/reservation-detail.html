@@ -60,11 +60,25 @@
 			</div>
 		</div>
 
+		<div class="form-group" >
+			<div class="col-sm-offset-2 col-sm-6">
+				<input type="submit" value="Book now!" class="btn btn-primary" ng-show="resDetailCtrl.isNew" />
+				<input type="submit" value="Update" class="btn btn-primary" ng-show="!resDetailCtrl.isNew" />
+				<input type="submit" value="Cancel reservation" class="btn btn-danger" ng-click="cancel()" ng-show="!resDetailCtrl.isNew"/>
+				<input type="submit" value="Pay reservation" class="btn btn-success" ng-click="pay()" ng-show="reservation.state !== 'PAID' && !resDetailCtrl.isNew"/>
+			</div><br />
+		</div>
+
+
+		<div class="form-group" ng-show="reservation.state === 'PAID'" >
+			<label class="col-sm-2 control-label">Enter email to print reservation</label>
+			<div class="col-sm-6">
+				<input name="email" type="email" ng-model="email" class="form-control" />
+			</div>
+		</div>
+
 		<div class="col-sm-offset-2 col-sm-6">
-			<input type="submit" value="Book now!" class="btn btn-primary" ng-show="resDetailCtrl.isNew" />
-			<input type="submit" value="Update" class="btn btn-primary" ng-show="!resDetailCtrl.isNew" />
-			<input type="submit" value="Cancel reservation" class="btn btn-danger" ng-click="cancel()" ng-show="!resDetailCtrl.isNew"/>
-			<input type="submit" value="Pay reservation" class="btn btn-success" ng-click="pay()" ng-show="!resDetailCtrl.isNew"/>
+			<input type="submit" value="Print tickets!" class="btn btn-success" ng-click="print()" />
 		</div>
 
 	</form>

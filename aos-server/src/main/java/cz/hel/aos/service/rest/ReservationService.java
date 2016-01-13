@@ -19,6 +19,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -26,6 +27,7 @@ import javax.ws.rs.core.Response.Status;
 import cz.hel.aos.Constants;
 import cz.hel.aos.entity.dto.ReservationDTO;
 import cz.hel.aos.service.ReservationManagement;
+import cz.hel.aos.util.StringUtils;
 
 @Path(Constants.RESERVATION_RESOURCE_PATH)
 @ApplicationScoped
@@ -119,6 +121,18 @@ public class ReservationService {
 		} catch (EJBException e) {
 			throw new BadRequestException(e.getMessage());
 		}
+		
+		return Response.ok().build();
+	}
+	
+	@PermitAll
+	@Path("{id}/print")
+	@GET
+	public Response print(@PathParam("id") Long id, @QueryParam("email") String email) {
+		if (StringUtils.isEmpty(email)) {
+			throw new BadRequestException("An email has to be provided.");
+		}
+		reservationManagement.printReservation(id, email);
 		
 		return Response.ok().build();
 	}

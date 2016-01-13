@@ -20,6 +20,8 @@ public interface ReservationManagement {
 
 	public void deleteReservation(Long id);
 
-	void pay(Long id, String payment);
+	public void pay(Long id, String payment);
+	
+	public void printReservation(Long id, String email);
 
 }

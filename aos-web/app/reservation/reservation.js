@@ -53,6 +53,7 @@ angular.module('aos.reservation', ['ngRoute', 'constants'])
     $scope.reservation = { };
     $scope.reservationPassword = null;
     $scope.canAccess = false;
+    $scope.email = '';
 
     var reservationId = $routeParams.reservationId;
     var flightId = $routeParams.flightId;
@@ -108,6 +109,15 @@ angular.module('aos.reservation', ['ngRoute', 'constants'])
       $http.post(API_URL + RESERVATION_PATH + reservationId + '/' + cardNum, $scope.reservation).then(function(response) {
         console.log('update reservation OK');
         $location.path(RESERVATION_PATH);
+      }, HandleHttpError);
+    }
+
+    $scope.print = function() {
+      $http.get(API_URL + RESERVATION_PATH + reservationId 
+          + '/' + 'print?email=' + $scope.email).then(function(response) {
+
+        console.log('print reservation OK');
+        $location.path(FLIGHT_PATH);
       }, HandleHttpError);
     }
 
