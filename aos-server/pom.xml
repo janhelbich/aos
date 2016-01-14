@@ -228,7 +228,7 @@
 			<version>${resteasy.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jackson2-provider</artifactId>
@@ -237,6 +237,11 @@
 		</dependency>
 
 		<!-- END RESTeasy -->
+		
+		<dependency>
+			<groupId>org.jboss.spec.javax.websocket</groupId>
+			<artifactId>jboss-websocket-api_1.1_spec</artifactId>
+		</dependency>
 
 	</dependencies>
 
